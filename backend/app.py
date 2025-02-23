@@ -6,19 +6,24 @@ import tensorflow as tf
 import joblib
 import numpy as np
 import pandas as pd
+import os
 
 app = Flask(__name__)
 CORS(app) 
 
-model = tf.keras.models.load_model("fire_size_classifier.h5")
-preprocessor = joblib.load("preprocessor_fireclass.pkl")
-label_encoder = joblib.load("label_encoder.pkl")
+MODEL_PATH = os.getenv("MODEL_PATH", "fire_size_classifier.h5")
+PREPROCESSOR_PATH = os.getenv("PREPROCESSOR_PATH", "preprocessor_fireclass.pkl")
+LABEL_ENCODER_PATH = os.getenv("LABEL_ENCODER_PATH", "label_encoder.pkl")
 
-API_KEY = "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"
+model = tf.keras.models.load_model(MODEL_PATH)
+preprocessor = joblib.load(PREPROCESSOR_PATH)
+label_encoder = joblib.load(LABEL_ENCODER_PATH)
 
-API_URL = "https://api.groq.com/openai/v1/chat/completions"
+API_KEY = os.getenv("API_KEY")
+API_URL = os.getenv("API_URL")
 
-geolocator = Nominatim(user_agent="count_locator_app")
+geolocator = Nominatim(user_agent=os.getenv("GEOLOCATOR_USER_AGENT", "count_locator_app"))
+
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 cause_mapping = {

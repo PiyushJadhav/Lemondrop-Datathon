@@ -50,13 +50,23 @@ const FirePredictionForm = () => {
     fetch("/data/counties.json")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Loaded counties:", data); 
+        console.log("Loaded counties:", data);
         setCounties(data);
       })
       .catch((error) => console.error("Error loading counties:", error));
   }, []);
 
-  const causes = ["Lightning", "Equipment Use", "Smoking", "Campfire", "Debris Burning", "Railroad", "Arson", "Children", "Miscellaneous"];
+  const causes = [
+    "Lightning",
+    "Equipment Use",
+    "Smoking",
+    "Campfire",
+    "Debris Burning",
+    "Railroad",
+    "Arson",
+    "Children",
+    "Miscellaneous",
+  ];
   const months = [
     "January",
     "February",
@@ -84,11 +94,14 @@ const FirePredictionForm = () => {
       longitude,
     };
     try {
-      const response = await fetch("http://localhost:5002/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://yizhrupgknq6h336sdnyjcd4q40cutau.lambda-url.us-east-2.on.aws/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -135,7 +148,7 @@ const FirePredictionForm = () => {
           flexDirection: "row",
           alignItems: "stretch",
           gap: "1rem",
-          width: mapVisible ? "1016px" : "500px", 
+          width: mapVisible ? "1016px" : "500px",
           transition: "width 0.3s ease-in-out",
         }}
       >
