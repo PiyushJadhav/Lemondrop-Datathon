@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import os
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 app = Flask(__name__)
 CORS(app) 
