@@ -94,11 +94,14 @@ const FirePredictionForm = () => {
       longitude,
     };
     try {
-      const response = await fetch("https://lemondrop-datathon.onrender.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://lemondrop-datathon.onrender.com/predict",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
