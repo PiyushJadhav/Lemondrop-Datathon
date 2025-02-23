@@ -114,6 +114,15 @@ def get_fire_mitigation_recommendation(county, month, year, cause, fire_size_cla
     else:
         return f"Error: {response.text}"
 
+@app.route('/predict', methods=['OPTIONS'])
+def handle_options():
+    response = jsonify({"message": "CORS preflight handled"})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    return response
+
+
 @app.route('/predict', methods=['POST'])
 def predict_fire():
     data = request.json
@@ -138,10 +147,16 @@ def predict_fire():
     print("PREDICTION:", fire_size_class)
     mitigation_plan = get_fire_mitigation_recommendation(county, month, year, cause, fire_size_class)
 
-    return jsonify({
+    response = jsonify({
         "predicted_fire_size_class": fire_size_class,
         "mitigation_plan": mitigation_plan
     })
+
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+    return response
 
 def geocode(county):
     if not county:
