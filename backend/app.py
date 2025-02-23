@@ -12,9 +12,9 @@ import os
 app = Flask(__name__)
 CORS(app) 
 
-MODEL_PATH = os.getenv("MODEL_PATH", "fire_size_classifier.h5")
-PREPROCESSOR_PATH = os.getenv("PREPROCESSOR_PATH", "preprocessor_fireclass.pkl")
-LABEL_ENCODER_PATH = os.getenv("LABEL_ENCODER_PATH", "label_encoder.pkl")
+MODEL_PATH = os.getenv("MODEL_PATH", "backend/fire_size_classifier.h5")
+PREPROCESSOR_PATH = os.getenv("PREPROCESSOR_PATH", "backend/preprocessor_fireclass.pkl")
+LABEL_ENCODER_PATH = os.getenv("LABEL_ENCODER_PATH", "backend/label_encoder.pkl")
 
 model = tf.keras.models.load_model(MODEL_PATH)
 preprocessor = joblib.load(PREPROCESSOR_PATH)
