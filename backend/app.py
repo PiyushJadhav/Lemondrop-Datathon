@@ -26,7 +26,6 @@ API_URL = os.getenv("API_URL")
 
 geolocator = Nominatim(user_agent=os.getenv("GEOLOCATOR_USER_AGENT", "count_locator_app"))
 
-CORS(app, resources={r"/*": {"origins": "https://main.d3kerizsq6l6h9.amplifyapp.com"}})
 
 
 cause_mapping = {
