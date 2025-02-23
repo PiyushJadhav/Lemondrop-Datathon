@@ -173,5 +173,5 @@ def geocode(county):
     else:
         return {'error': 'County not found'}
 
-def lambda_handler(event, context):
-    return awsgi.response(app, event, context)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000, debug=True)
