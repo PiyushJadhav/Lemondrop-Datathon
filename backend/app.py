@@ -25,7 +25,8 @@ API_URL = os.getenv("API_URL")
 
 geolocator = Nominatim(user_agent=os.getenv("GEOLOCATOR_USER_AGENT", "count_locator_app"))
 
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "https://main.d3kerizsq6l6h9.amplifyapp.com"}})
+
 
 cause_mapping = {
     "Lightning": 0,
@@ -117,11 +118,11 @@ def get_fire_mitigation_recommendation(county, month, year, cause, fire_size_cla
 
 @app.after_request
 def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Origin"] = "https://main.d3kerizsq6l6h9.amplifyapp.com"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     return response
-
+    
 @app.route('/predict', methods=['OPTIONS'])
 def handle_options():
     return add_cors_headers(jsonify({"message": "CORS preflight handled"}))
