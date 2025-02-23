@@ -7,7 +7,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import os
-import awsgi
+
 
 app = Flask(__name__)
 CORS(app) 
@@ -121,7 +121,7 @@ def add_cors_headers(response):
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     return response
-    
+
 @app.route('/predict', methods=['OPTIONS'])
 def handle_options():
     return add_cors_headers(jsonify({"message": "CORS preflight handled"}))

@@ -1,8 +1,9 @@
 flask
-geopy
 flask-cors
-requests
+gunicorn
 tensorflow
 joblib
 numpy
 pandas
+requests
+uvicorn
