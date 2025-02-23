@@ -8,4 +8,4 @@ pandas
 requests
 uvicorn
 geopy
-sklearn
+scikit-learn
